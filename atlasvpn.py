@@ -35,7 +35,7 @@ i = 1
 #     }
 os.system('cls')
 Banner()
-uuid = input("Enter UUID : ")
+uuid = input("Enter referrer_uuid : ")
 # Sample UUID : 91cc5edf-15e0-49c6-bf2e-88b7a131ee0d
 
 while i<=11:
