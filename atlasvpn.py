@@ -43,6 +43,8 @@ while i<=11:
         os.system('cls')
         Banner()
         print("DONE. Enjoy 70 Days Premium. :)")
+        print("Press any key to EXIT.")
+        input()
         break
     try:
 
