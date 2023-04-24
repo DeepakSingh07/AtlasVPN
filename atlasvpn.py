@@ -2,30 +2,48 @@ import requests
 import json
 import time
 import re
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+import os
+
+options = webdriver.ChromeOptions()
+options.add_experimental_option('excludeSwitches', ['enable-logging'])
+
+# import threading
 
 # Referral Link : https://go.atlasv.pn/29D2WYgiMLp3Eo2RA
 
-print('''
- █████╗ ████████╗██╗      █████╗ ███████╗   ██╗   ██╗██████╗ ███╗   ██╗
-██╔══██╗╚══██╔══╝██║     ██╔══██╗██╔════╝   ██║   ██║██╔══██╗████╗  ██║
-███████║   ██║   ██║     ███████║███████╗   ██║   ██║██████╔╝██╔██╗ ██║
-██╔══██║   ██║   ██║     ██╔══██║╚════██║   ╚██╗ ██╔╝██╔═══╝ ██║╚██╗██║
-██║  ██║   ██║   ███████╗██║  ██║███████║    ╚████╔╝ ██║     ██║ ╚████║
-╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝╚══════╝     ╚═══╝  ╚═╝     ╚═╝  ╚═══╝
-                [+]  Developed by DE3P4K  [+]
-''')
+def Banner():
+    print('''
+     █████╗ ████████╗██╗      █████╗ ███████╗   ██╗   ██╗██████╗ ███╗   ██╗
+    ██╔══██╗╚══██╔══╝██║     ██╔══██╗██╔════╝   ██║   ██║██╔══██╗████╗  ██║
+    ███████║   ██║   ██║     ███████║███████╗   ██║   ██║██████╔╝██╔██╗ ██║
+    ██╔══██║   ██║   ██║     ██╔══██║╚════██║   ╚██╗ ██╔╝██╔═══╝ ██║╚██╗██║
+    ██║  ██║   ██║   ███████╗██║  ██║███████║    ╚████╔╝ ██║     ██║ ╚████║
+    ╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝╚══════╝     ╚═══╝  ╚═╝     ╚═╝  ╚═══╝
+                    [+]  Developed by DE3P4K  [+]
+    ''')
 
-proxies_list = []
-with open("proxies.txt", "r") as f:
-    proxies_list = f.read().splitlines()
+# proxies_list = []
+# with open("proxies.txt", "r") as f:
+#     proxies_list = f.read().splitlines()
 
-i = 0
+i = 1
 # for proxy in proxies_list:
 #     proxy_dict = {
 #         "https": proxy
 #     }
+os.system('cls')
+Banner()
+uuid = input("Enter UUID : ")
+# Sample UUID : 91cc5edf-15e0-49c6-bf2e-88b7a131ee0d
 
-while i<=18:
+while i<=11:
+    if i==11:
+        os.system('cls')
+        Banner()
+        print("DONE. Enjoy 70 Days Premium. :)")
+        break
     try:
 
         # Generating Random Email using developermail.
@@ -80,7 +98,7 @@ while i<=18:
         data2 = {
             "email": f'{name}@developermail.com',
             "marketing_consent":False,
-            "referrer_uuid":"7b3e8880-86b9-42c4-9b5b-5d5e7ff828d0",
+            "referrer_uuid":f"{uuid}",
             "referral_offer":"initial"
         }
 
@@ -94,7 +112,7 @@ while i<=18:
                 'Content-Type': 'application/json'
             }
 
-            time.sleep(5)
+            time.sleep(3)
             
             ## Fetching Email from Inbox
             response = requests.get(inboxurl, headers=inboxheaders)
@@ -118,14 +136,21 @@ while i<=18:
             if match:
                 link = match.group(0)
                 link = link.replace('3D', '').replace('amp;', '').replace("=\\r", '').replace('\\n', '')
-                print(link)
+                # print(link)
 
-                try:
-                    ## Writing activation links to Atlas.txt file
-                    with open('Atlas.txt', 'a') as f:
-                        f.write(f'{link}\n')
-                except Exception as e:
-                    print(f'Error: {e}')
+                driver = webdriver.Chrome(options=options)
+                driver.get(link)
+                
+                os.system('cls')
+                Banner()
+                print(f'Referral Count : {i}')
+
+                # try:
+                #     ## Writing activation links to Atlas.txt file
+                #     with open('Atlas.txt', 'a') as f:
+                #         f.write(f'{link}\n')
+                # except Exception as e:
+                #     print(f'Error: {e}')
             else:
                 pass
         except:
@@ -134,5 +159,3 @@ while i<=18:
     except:
         print("Couldn't Generate Mail. Check Req1")
     i = i+1
-
-f.close
