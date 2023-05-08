@@ -17,3 +17,5 @@ Steps to get your Referrer_UUID:
 5. Check the join request [POST].
 6. Go to payload and copy your referrer_uuid.
 7. DONE.
+
+[ This script uses Selenium to open links for the time being as accessing the link using requests was not counting as referral IDK why. ]
